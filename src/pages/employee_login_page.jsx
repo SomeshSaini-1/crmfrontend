@@ -54,6 +54,7 @@ export default function EmployeeLoginPage() {
       localStorage.setItem("employeeType", res.data.data.role); //  Important for TL/Employee
       localStorage.setItem("employeeName", res.data.data.name);
       localStorage.setItem("profileImage", res.data.data.profileImage);
+      localStorage.setItem("employeeToken", res.data.token);
 
 
       localStorage.setItem("employeeIndustry", res.data.data.industry); // 👈 Add this line

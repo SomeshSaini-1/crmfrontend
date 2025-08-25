@@ -51,14 +51,27 @@ useEffect(() => {
         localStorage.setItem("adminEmail", resData.data.email);
 
 
-        if (rememberMe) {
-            localStorage.setItem("rememberAdminEmail", email);
-            localStorage.setItem("rememberAdminPassword", password);
+        // if (rememberMe) {
+        //     localStorage.setItem("rememberAdminEmail", email);
+        //     localStorage.setItem("rememberAdminPassword", password);
 
-        } else {
-             localStorage.removeItem("rememberEmail");
-             localStorage.removeItem("rememberPassword");
-        }
+        // } else {
+        //      localStorage.removeItem("rememberEmail");
+        //      localStorage.removeItem("rememberPassword");
+        // }
+
+
+
+        if (rememberMe) {
+  localStorage.setItem("rememberAdminEmail", email);
+  localStorage.setItem("rememberAdminPassword", password);
+} else {
+  localStorage.removeItem("rememberAdminEmail");
+  localStorage.removeItem("rememberAdminPassword");
+}
+
+
+
 
         toast.success("Admin Login Successfully!", {autoClose:2000});
                       setTimeout(() => {

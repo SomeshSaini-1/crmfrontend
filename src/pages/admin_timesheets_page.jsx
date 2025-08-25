@@ -63,27 +63,7 @@ export default function AdminTimesheetsPage() {
     }
   };
 
-  // const handleEdit = (employee) => {
-  //   alert(`Edit feature clicked for: ${employee.name}`);
-  // };
 
-  // const handleDelete = async (id) => {
-  //   if (window.confirm("Are you sure you want to delete this employee?")) {
-  //     try {
-  //       const res = await axios.post("http://localhost:3004/delete-employee", { _id: id });
-
-  //       if (res.data.success) {
-  //         alert(res.data.message || "Deleted successfully");
-  //         setEmployees((prev) => prev.filter((emp) => emp._id !== id));
-  //       } else {
-  //         alert(res.data.message || "Failed to delete employee");
-  //       }
-  //     } catch (error) {
-  //       console.error("Delete failed:", error.message);
-  //       alert("Something went wrong while deleting.");
-  //     }
-  //   }
-  // };
 
   const confirmDeleteEmployee = async () => {
   try {
@@ -193,7 +173,8 @@ useEffect(()=>{
       <AdminHeader />
 
 
-      <div className="sticky top-12 z-20 bg-white shadow px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="sticky top-12 z-20 bg-white shadow px-3 sm:px-4 md:px-6
+ py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
         {/* Title */}
         <h1 className="text-2xl md:text-3xl font-bold text-blue-700 whitespace-nowrap">
@@ -207,7 +188,8 @@ useEffect(()=>{
          <input
            type="text"
            placeholder="Search by name or email..."
-           className="px-4 py-2 border border-gray-300 rounded-lg w-full md:w-80 focus:outline-none focus:ring-2 focus:ring-blue-400"
+           className="px-4 py-2 border border-gray-300 rounded-lg w-full sm:w-64 md:w-80 focus:outline-none focus:ring-2 focus:ring-blue-400"
+
            value={search}
            onChange={(e) => setSearch(e.target.value)}
           />
@@ -226,7 +208,8 @@ useEffect(()=>{
       <div className="p-6">
         {!selectedEmployee ? (
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6
+">
   {employees.length === 0 ? (
     // case: No employee added at all
     <div className="col-span-full text-center py-10 text-gray-500 font-semibold">
@@ -294,7 +277,7 @@ useEffect(()=>{
       </div>
     ))
   )}
-</div>
+          </div>
 
 
         ) : (
@@ -302,6 +285,7 @@ useEffect(()=>{
           <div className="bg-white p-6 md:p-8 rounded-xl shadow-xl w-full">
 
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6">
+
               
              <img
                src={
@@ -309,7 +293,7 @@ useEffect(()=>{
                ? selectedEmployee.profileImage: "/user1.jpg"
                }
                alt={selectedEmployee.name}
-               className="w-24 h-24 rounded-full border-2 border-[#32A9C7] shadow object-cover cursor-pointer"
+               className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#32A9C7] shadow object-cover"
                onClick={() =>
                navigate("/employeedetailsadminsidepage", {
                state: { employee: selectedEmployee }
@@ -318,7 +302,7 @@ useEffect(()=>{
               />
 
               <div>
-                <h2 className="text-2xl font-bold text-[#32A9C7]">{selectedEmployee.name}</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-[#32A9C7]">{selectedEmployee.name}</h2>
                 <p><strong>ID:</strong> {selectedEmployee.id}</p>
                 <p><strong>Email:</strong> {selectedEmployee.email}</p>
                 <p><strong>Designation:</strong> {selectedEmployee.designation}</p>
@@ -327,7 +311,8 @@ useEffect(()=>{
               </div>
             </div>
 
-            <div className="flex justify-end items-center mb-4">
+            <div className="flex flex-col sm:flex-row sm:justify-end items-start sm:items-center gap-2 mb-4">
+
               <label className="text-sm font-semibold mr-2">Filter by Month:</label>
                 <input
                    type="month"
@@ -338,37 +323,38 @@ useEffect(()=>{
             </div>
 
 
-            <div className="overflow-auto">
-              <table className="min-w-full border-collapse table-auto text-sm shadow-sm">
+            <div className="overflow-x-auto -mx-3 sm:mx-0">
+              <table className="min-w-[720px] md:min-w-full border-collapse table-auto text-xs sm:text-sm shadow-sm">
+
                 <thead className="bg-blue-100 text-blue-800 font-semibold text-left">
                   <tr>
-                    <th className="border px-4 py-2">Date</th>
-                    <th className="border px-4 py-2">Login</th>
-                    <th className="border px-4 py-2">Logout</th>
-                    <th className="border px-4 py-2">Hours</th>
-                    <th className="border px-4 py-2">Project</th>
-                    <th className="border px-4 py-2">Task</th>
-                    <th className="border px-4 py-2">Attachment</th>
-                    <th className="border px-4 py-2">Suggestions</th>
-                    <th className="border px-4 py-2">Next Day Task</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Date</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Login</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Logout</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Hours</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Project</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Task</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Attachment</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Suggestions</th>
+                    <th className="border px-2 py-1 sm:px-4 sm:py-2">Next Day Task</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredTimesheet.length > 0 ? (
                     filteredTimesheet.map((entry, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="border px-4 py-2">
+                        <td className="border px-2 py-1 sm:px-4 sm:py-2">
                           {new Date(entry.createdAt).toLocaleDateString()}
                         </td>
-                        <td className="border px-4 py-2">{entry.login_time}</td>
-                        <td className="border px-4 py-2">{entry.logout_time}</td>
-                        <td className="border px-4 py-2">{entry.hours}</td>
-                        <td className="border px-4 py-2">{entry.project_name}</td>
+                        <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.login_time}</td>
+                        <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.logout_time}</td>
+                        <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.hours}</td>
+                        <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.project_name}</td>
 
 
-                        {/* <td className="border px-4 py-2">{entry.task}</td> */}
+                        {/* <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.task}</td> */}
 
-             <td className="border px-4 py-2">
+             <td className="border px-2 py-1 sm:px-4 sm:py-2">
                                     {entry.task && entry.task.split(" ").length > 10 ? ( //  condition for >10 words
                                       <div className="flex items-center space-x-2">
                                         <span>{entry.task.split(" ").slice(0, 6).join(" ")}...</span> {/*  show first 10 words */}
@@ -386,7 +372,7 @@ useEffect(()=>{
 
 
                         {/*  Attachment - show download/view link */}
-                      <td className="border px-4 py-2">{entry.attachment ? (
+                      <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.attachment ? (
            <a
             href={`http://localhost:3004/uploads/${entry.attachment}`}
             target="_blank"
@@ -405,9 +391,9 @@ useEffect(()=>{
                       
 
                        {/*  Description */}
-                      {/* <td className="border px-4 py-2">{entry.suggestions || "-"}</td> */}
+                      {/* <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.suggestions || "-"}</td> */}
 
-                      <td className="border px-4 py-2">
+                      <td className="border px-2 py-1 sm:px-4 sm:py-2">
   {!entry.suggestions || entry.suggestions.trim() === "" ? (
     <div className="flex justify-center items-center h-full">
               <span className="text-2xl">-</span>
@@ -429,9 +415,9 @@ useEffect(()=>{
 
 
 
-                  {/* <td className="border px-4 py-2">{entry.next_day_task}</td>*/}
+                  {/* <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.next_day_task}</td>*/}
 
-                   <td className="border px-4 py-2">
+                   <td className="border px-2 py-1 sm:px-4 sm:py-2">
                                           {entry.next_day_task.split(" ").length > 10 ? ( //  condition for >10 words
                                             <div className="flex items-center space-x-2">
                                               <span>{entry.next_day_task && entry.next_day_task.split(" ").slice(0, 6).join(" ")}...</span> {/*  show first 10 words */}
@@ -478,7 +464,8 @@ useEffect(()=>{
         {showModal && (
 
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="relative bg-white rounded-2xl shadow-2xl p-6 max-w-xl w-full transition-all duration-300 scale-100">
+      <div className="relative bg-white rounded-2xl shadow-2xl p-4 sm:p-6 w-[92%] max-w-sm sm:max-w-md md:max-w-xl">
+
     {/* Close Button */}
     <button
       onClick={closeModal}
@@ -509,7 +496,8 @@ useEffect(()=>{
 
         {showDeleteConfirm && (
   <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-[92%] max-w-sm sm:max-w-md md:max-w-md">
+
       <h2 className="text-xl font-semibold mb-4 text-center">Confirm Deletion</h2>
       <p className="mb-6 text-center">Are you sure you want to delete this employee?</p>
       <div className="flex justify-center gap-4">

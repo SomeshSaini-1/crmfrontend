@@ -330,17 +330,21 @@ const handleProgressChange = async (taskId, newProgress) => {
 
   return (
     <div className="min-h-screen bg-[#CDE6EC] font-sans">
+      <div className="container mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+
       <EmployeeHeader />
        {/* <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} /> */}
-      <div className="p-4">
-        <div className="flex items-center justify-between ">
+      <div className="py-4">
+       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
 
   {employee?.role !== "Employee TL" && (
   <h2 className="text-2xl font-semibold">My Assigned Tasks</h2>
 )}
   {employee?.role === "Employee TL" && (
-  <div className="flex justify-center mb-6">
-    <div className="flex bg-[#f6f9fa] rounded-full p-1 w-fit">
+  <div className="flex justify-center mb-4 sm:mb-6 px-1">
+    <div className="flex flex-wrap bg-[#f6f9fa] rounded-full p-1 w-full sm:w-fit gap-1">
+
       <button
         onClick={() => setActiveTable("My Assigned Tasks")}
         className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
@@ -367,23 +371,27 @@ const handleProgressChange = async (taskId, newProgress) => {
 
 
 
-<div className="flex items-center justify-between mb-4">
+<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
+
 {employee?.role === "Employee TL" && (
   <button
     onClick={() => setShowForm(true)}
-    className="bg-[#32A9C7] text-white px-4 py-2 mr-3 rounded shadow hover:bg-[#2b97b1] ml-4"
+    className="bg-[#32A9C7] text-white px-4 py-2 rounded shadow hover:bg-[#2b97b1] w-full sm:w-auto sm:ml-4 sm:mr-3"
+
   >
     Assign Task
   </button>
 )}
 
 
-  <div>
+  <div className="w-full sm:w-auto">
+
     <label className="mr-2 text-sm text-gray-700">Filter by Month:</label>
     <select
       value={selectedMonth}
       onChange={(e) => setSelectedMonth(e.target.value)}
-      className="px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+      className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+
     >
       <option value="All">All</option>
       <option value="0">January</option>
@@ -403,10 +411,18 @@ const handleProgressChange = async (taskId, newProgress) => {
   </div>
 </div>
 
+
+
+
+
+
          {(employee?.role !== "Employee TL" || activeTable === "My Assigned Tasks") && (
         <div className="bg-white rounded-lg shadow p-4 overflow-auto">
+
           <table className="min-w-full text-sm border">
-            <thead className="bg-[#5ed9de] text-gray-800">
+
+            <thead className="bg-[#5ed9de] text-gray-800 text-xs sm:text-sm">
+
               <tr>
                 <th className="p-3 border">Date</th>
                 <th className="p-3 border">Sent At</th>
@@ -540,7 +556,8 @@ const handleProgressChange = async (taskId, newProgress) => {
     {/* <h2 className="text-xl font-semibold mb-2">Tasks Assigned By You (as TL)</h2> */}
     <div className="bg-white rounded-lg shadow p-4 overflow-auto">
       <table className="min-w-full text-sm border">
-        <thead className="bg-[#5ed9de] text-gray-800">
+        <thead className="bg-[#5ed9de] text-gray-800 text-xs sm:text-sm">
+
           <tr>
             <th className="p-3 border">Date</th>
             <th className="p-3 border">Sent At</th>
@@ -642,7 +659,8 @@ const handleProgressChange = async (taskId, newProgress) => {
 
       {showForm && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white rounded-lg p-6 w-full max-w-2xl shadow-lg">
+    <div className="bg-white rounded-lg p-4 sm:p-6 w-[92%] max-w-xl sm:max-w-2xl shadow-lg">
+
             <h2 className="text-xl font-bold mb-4 text-[#32A9C7] text-center">Assign Task</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -749,7 +767,8 @@ const handleProgressChange = async (taskId, newProgress) => {
       {showPopup && (
 
        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-  <div className="relative bg-white rounded-2xl shadow-2xl p-6 max-w-xl w-full transition-all duration-300 scale-100">
+  <div className="relative bg-white rounded-2xl shadow-2xl p-4 sm:p-6 w-[90%] max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+
     {/* Close Button */}
     <button
       onClick={closePopup}
@@ -768,7 +787,8 @@ const handleProgressChange = async (taskId, newProgress) => {
     </div>
 
     {/* Task Content */}
-    <div className="max-h-72 overflow-y-auto pr-1">
+    <div className="max-h-[70vh] overflow-y-auto pr-1">
+
       <p className="text-gray-700 whitespace-pre-wrap text-sm leading-relaxed">
         {selectedTask}
       </p>
@@ -777,6 +797,7 @@ const handleProgressChange = async (taskId, newProgress) => {
        </div>
 
       )}
+    </div>
     </div>
   );
 }

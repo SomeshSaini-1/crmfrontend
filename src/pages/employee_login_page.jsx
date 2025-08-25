@@ -75,14 +75,24 @@ export default function EmployeeLoginPage() {
       }
 
       //  Remember me
-      if (rememberMe) {
-       localStorage.setItem("rememberEmployeeEmail", email);
-       localStorage.setItem("rememberEmployeePassword", password);
+      // if (rememberMe) {
+      //  localStorage.setItem("rememberEmployeeEmail", email);
+      //  localStorage.setItem("rememberEmployeePassword", password);
 
-      } else {
-        localStorage.removeItem("rememberEmail");
-        localStorage.removeItem("rememberPassword");
-      }
+      // } else {
+      //   localStorage.removeItem("rememberEmail");
+      //   localStorage.removeItem("rememberPassword");
+      // }
+
+
+      if (rememberMe) {
+  localStorage.setItem("rememberEmployeeEmail", email);
+  localStorage.setItem("rememberEmployeePassword", password);
+} else {
+  localStorage.removeItem("rememberEmployeeEmail");
+  localStorage.removeItem("rememberEmployeePassword");
+}
+
 
 
       

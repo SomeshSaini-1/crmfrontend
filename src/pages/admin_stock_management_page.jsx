@@ -336,7 +336,7 @@ const handleShowHistory = (history) => {
 
 
       {showDeleteConfirm && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg">
       <h2 className="text-lg font-bold mb-4 text-center">Confirm Deletion</h2>
       <p className="text-center text-gray-700 mb-6">

@@ -1,4 +1,6 @@
 
+
+
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import AdminHeader from "../components/admin_header";
@@ -8,6 +10,9 @@ import CreatableSelect from "react-select/creatable";
 
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 
 
 export default function AdminEditEmployeePage() {
@@ -44,6 +49,7 @@ export default function AdminEditEmployeePage() {
         gender: employee.gender || "",
         role: employee.role || "",
         industry: employee.industry || "",
+        showStockOption: employee.showStockOption || false, 
       });
     }
 
@@ -108,6 +114,8 @@ export default function AdminEditEmployeePage() {
       formData.append("role", employeeData.role);
       formData.append("industry", employeeData.industry);
       formData.append("project", employeeData.project.map((p) => p.value).join(","));
+      formData.append("showStockOption", employeeData.showStockOption ? "true" : "false");
+
 
       if (employeeData.password.trim() !== "") {
         formData.append("password", employeeData.password);
@@ -141,177 +149,275 @@ export default function AdminEditEmployeePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#CDE6EC]">
-      <div className="sticky top-0 z-50">
-        <AdminHeader />
-      </div>
-      {/* <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} /> */}
+    <div className="min-h-screen bg-[#CDE6EC] flex flex-col">
+  <div className="sticky top-0 z-50">
+    <AdminHeader />
+  </div>
 
-      <div className="flex justify-center mt-6 px-4">
-        <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-3xl">
-          <h2 className="text-xl font-semibold text-blue-700 mb-4 text-center">
-            Edit Employee
-          </h2>
+  <div className="flex justify-center flex-1 mt-6 mb-6 px-4">
+    <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-4xl">
+      <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">
+        Edit Employee
+      </h2>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSubmit}>
+        
+        {/* Stock Option Checkbox */}
+        <div className="md:col-span-2 flex items-center gap-3 border p-3 rounded-lg bg-blue-50">
+          <input
+            type="checkbox"
+            id="showStockOption"
+            name="showStockOption"
+            checked={employeeData.showStockOption || false}
+            onChange={(e) =>
+              setEmployeeData({
+                ...employeeData,
+                showStockOption: e.target.checked,
+              })
+            }
+            className="h-5 w-5"
+          />
+          <label htmlFor="showStockOption" className="text-sm font-medium text-gray-700">
+            Allow Stock Option Access
+          </label>
+        </div>
 
+        {/* Employee ID */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Employee ID</label>
+          <input
+            type="text"
+            name="employeeId"
+            placeholder="Enter Employee ID"
+            value={employeeData.employeeId}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="text" name="employeeId" placeholder="Employee ID" value={employeeData.         employeeId} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* Full Name */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Enter Full Name"
+            value={employeeData.fullName}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="text" name="fullName" placeholder="Full Name" value={employeeData.fullName} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            value={employeeData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="email" name="email" placeholder="Email" value={employeeData.email} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* Password */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Change Password (optional)</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter New Password"
+            value={employeeData.password}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="password" name="password" placeholder="Change Password (optional)" value={employeeData.password} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* DOB */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Date of Birth</label>
+          <input
+            type="date"
+            name="dob"
+            value={employeeData.dob}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="date" name="dob" value={employeeData.dob} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* Contact */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Contact Number</label>
+          <input
+            type="text"
+            name="contact"
+            placeholder="Enter Contact Number"
+            value={employeeData.contact}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="text" name="contact" placeholder="Contact Number" value={employeeData.contact} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* Alternate Contact */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Alternate Number</label>
+          <input
+            type="text"
+            name="alternate"
+            placeholder="Enter Alternate Number"
+            value={employeeData.alternate}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <input type="text" name="alternate" placeholder="Alternate Number" value={employeeData.alternate} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
+        {/* Address */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Address</label>
+          <input
+            name="address"
+            placeholder="Enter Address"
+            value={employeeData.address}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+        </div>
 
-            <textarea name="address" placeholder="Address" value={employeeData.address} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm" />
-
-            <select name="gender" value={employeeData.gender} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm bg-white">
+        {/* Gender */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Gender</label>
+          <div className="relative">
+            <select
+              name="gender"
+              value={employeeData.gender}
+              onChange={handleChange}
+              className="w-full px-4 py-2 pr-8 border rounded-lg text-sm bg-white appearance-none focus:ring-2 focus:ring-blue-400 outline-none"
+            >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
             </select>
-
-            {/* <select name="designation" value={employeeData.designation} onChange={handleChange} className="px-4 py-2 border rounded-md text-sm bg-white">
-              <option value="">Select Designation</option>
-              <option value="Software developer">Software developer</option>
-              <option value="Frontend Developer">Frontend Developer</option>
-              <option value="Backend Developer">Backend Developer</option>
-              <option value="Project manager">Project manager</option>
-              <option value="Director">Director</option>
-              <option value="Mobile app developer">Mobile app developer</option>
-              <option value="Flutter developer">Flutter developer</option>
-              <option value="IoT Developer">IoT Developer</option>
-              <option value="Network Engineer">Network Engineer</option>
-              <option value="IoT Data Scientist">IoT Data Scientist</option>
-              <option value="IoT Security Specialist">IoT Security Specialist</option>
-            </select> */}
-
-
-
-               <CreatableSelect
-          isClearable
-          options={[
-            { value: "Software developer", label: "Software developer" },
-            { value: "Frontend Developer", label: "Frontend Developer" },
-            { value: "Backend Developer", label: "Backend Developer" },
-            { value: "Project manager", label: "Project manager" },
-            { value: "HR", label: "HR" },
-            { value: "Mobile app developer", label: "Mobile app developer" },
-            { value: "Flutter developer", label: "Flutter developer" },
-            { value: "IoT Developer", label: "IoT Developer" },
-            { value: "Network Engineer", label: "Network Engineer" },
-            { value: "IoT Data Scientist", label: "IoT Data Scientist" },
-            { value: "IoT Security Specialist", label: "IoT Security Specialist" },
-          ]}
-          onChange={(selectedOption) =>
-            setEmployeeData({
-              ...employeeData,
-              designation: selectedOption ? selectedOption.value : "",
-            })
-          }
-          value={
-            employeeData.designation
-              ? { value: employeeData.designation, label: employeeData.designation }
-              : null
-          }
-          className="text-sm"
-          classNamePrefix="select"
-          placeholder="Select or type designation..."
-        />
-
-
-
-            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-  <select
-    name="role"
-    value={employeeData.role}
-    onChange={handleChange}
-    className="w-full px-4 py-2 border rounded-md text-sm bg-white"
-  >
-    <option value="">Select Role</option>
-    <option value="Employee">Employee</option>
-    <option value="Employee TL">Employee TL</option>
-  </select>
-
-  <Select
-    isMulti
-    name="project"
-    options={projectList.map((proj) => ({ label: proj.project_name, value: proj.project_name }))}
-    value={employeeData.project}
-    onChange={(selected) => 
-      setEmployeeData((prev) => ({
-        ...prev,
-        project: selected,
-      }))
-    }
-    className="text-sm"
-    classNamePrefix="select"
-    placeholder="Select projects..."/>
-     </div>
-
-
-
-     <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-             <select
-                name="industry"
-                value={employeeData.industry}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-md text-sm bg-white"
-             >
-                <option value="">Select industry</option>
-                <option value="Software">Software</option>
-                <option value="Firmware/Embedded">Firmware/Embedded</option>
-                <option value="Hardware">Hardware</option>
-                <option value="HR">HR</option>
-                <option value="BA">BA</option>
-                <option value="Sales & Marketing">Sales & Marketing</option>
-
-             </select>
-             </div>
-
-
-
-            <div className="md:col-span-2">
-              <label className="block mb-1 font-semibold ">Profile Image</label>
-              <input
-                type="file"
-                name="file"
-                onChange={handleChange}
-                ref={fileInputRef}
-                className="w-full px-3 py-2 border rounded-md text-sm"
-              />
-              {employeeData.profileImage && !employeeData.file && (
-                <img
-                  src={
-                    employeeData.profileImage.startsWith("http")
-                      ? employeeData.profileImage
-                      : `https://otplai.com/Metallicz/Myapi/upload_logo/${employeeData.profileImage}`
-                  }
-                  alt="Profile Preview"
-                  onError={(e) => (e.target.style.display = "none")}
-                  className="mt-2 w-24 h-24 object-cover rounded-full border"
-                />
-              )}
-            </div>
-
-            <div className="md:col-span-2 flex justify-end gap-4 mt-4">
-              <button type="button" onClick={() => navigate("/admintimesheetspage")} className="w-32 text-blue-600 border border-blue-600 py-2 rounded-md hover:bg-blue-50 text-sm">Cancel</button>
-              <button type="submit" className="w-32 bg-[#32A9C7] text-white py-2 rounded-md hover:bg-[#5895a4] text-sm">Save Changes</button>
-              
-            </div>
-          </form>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl pointer-events-none">
+              <MdKeyboardArrowDown />
+            </span>
+          </div>
         </div>
-      </div>
+
+    
+          {/* Role */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">Role</label>
+            <div className="relative">
+              <select
+                name="role"
+                value={employeeData.role}
+                onChange={handleChange}
+                className="w-full px-4 py-2 pr-8 border rounded-lg text-sm bg-white appearance-none focus:ring-2 focus:ring-blue-400 outline-none"
+              >
+                <option value="">Select Role</option>
+                <option value="Employee">Employee</option>
+                <option value="Employee TL">Employee TL</option>
+              </select>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl pointer-events-none">
+                <MdKeyboardArrowDown />
+              </span>
+            </div>
+          </div>
+
+          {/* Projects */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">Projects</label>
+            <Select
+              isMulti
+              name="project"
+              options={projectList.map((proj) => ({
+                label: proj.project_name,
+                value: proj.project_name,
+              }))}
+              value={employeeData.project}
+              onChange={(selected) =>
+                setEmployeeData((prev) => ({
+                  ...prev,
+                  project: selected,
+                }))
+              }
+              className="text-sm"
+              classNamePrefix="select"
+              placeholder="Select projects..."
+            />
+          </div>
+        
+
+        {/* Industry */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Industry</label>
+          <div className="relative">
+            <select
+              name="industry"
+              value={employeeData.industry}
+              onChange={handleChange}
+              className="w-full px-4 py-2 pr-8 border rounded-lg text-sm bg-white appearance-none focus:ring-2 focus:ring-blue-400 outline-none"
+            >
+              <option value="">Select Industry</option>
+              <option value="Software">Software</option>
+              <option value="Firmware/Embedded">Firmware/Embedded</option>
+              <option value="Hardware">Hardware</option>
+              <option value="HR">HR</option>
+              <option value="BA">BA</option>
+              <option value="Sales & Marketing">Sales & Marketing</option>
+            </select>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl pointer-events-none">
+              <MdKeyboardArrowDown />
+            </span>
+          </div>
+        </div>
+
+        {/* Profile Image */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold text-gray-600 mb-1">Profile Image</label>
+          <input
+            type="file"
+            name="file"
+            onChange={handleChange}
+            ref={fileInputRef}
+            className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 outline-none"
+          />
+          {employeeData.profileImage && !employeeData.file && (
+            <img
+              src={
+                employeeData.profileImage.startsWith("http")
+                  ? employeeData.profileImage
+                  : `https://otplai.com/Metallicz/Myapi/upload_logo/${employeeData.profileImage}`
+              }
+              alt="Profile Preview"
+              onError={(e) => (e.target.style.display = "none")}
+              className="mt-3 w-24 h-24 object-cover rounded-full border shadow-md"
+            />
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="md:col-span-2 flex justify-end gap-4 mt-6">
+          <button
+            type="button"
+            onClick={() => navigate("/admintimesheetspage")}
+            className="w-32 text-blue-600 border border-blue-600 py-2 rounded-lg hover:bg-blue-50 text-sm font-semibold transition"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="w-32 bg-[#32A9C7] text-white py-2 rounded-lg hover:bg-[#5895a4] text-sm font-semibold transition"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+    </div>
+
   );
 }
-
-

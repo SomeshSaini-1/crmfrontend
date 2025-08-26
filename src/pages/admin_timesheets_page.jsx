@@ -479,7 +479,7 @@ useEffect(()=>{
     <div className="flex items-center space-x-2 mb-4">
       <div className="w-2 h-6 bg-blue-500 rounded-sm"></div>
       <h2 className="text-xl font-semibold text-gray-800 tracking-wide">
-        Task Description
+        Full Description
       </h2>
     </div>
 

@@ -7,6 +7,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AdminHeader from '../components/admin_header';
 
+import { MdKeyboardArrowDown } from "react-icons/md";
+
+
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -219,7 +222,7 @@ const handleShowHistory = (history) => {
   />
 
   {/* Category Dropdown */}
-  <select
+  {/* <select
     value={selectedCategory}
     onChange={(e) => setSelectedCategory(e.target.value)}
     className="border border-gray-300 rounded px-4 py-2 w-full md:w-1/3"
@@ -229,7 +232,30 @@ const handleShowHistory = (history) => {
         {cat === "All" ? "All Categories" : cat}
       </option>
     ))}
+  </select> */}
+
+
+
+  <div className="relative w-full md:w-1/3">
+  <select
+    value={selectedCategory}
+    onChange={(e) => setSelectedCategory(e.target.value)}
+    className="border border-gray-300 rounded px-4 py-2 pr-8 w-full appearance-none bg-white"
+  >
+    {categories.map((cat, idx) => (
+      <option key={idx} value={cat}>
+        {cat === "All" ? "All Categories" : cat}
+      </option>
+    ))}
   </select>
+  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl text-gray-500 pointer-events-none">
+    <MdKeyboardArrowDown />
+  </span>
+</div>
+
+
+
+
 
   {/* Excel Export */}
   <button

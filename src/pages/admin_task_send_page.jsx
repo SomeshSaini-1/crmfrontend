@@ -5,6 +5,7 @@ import AdminHeader from "../components/admin_header";
 import Select from "react-select";
 import { MdOutlineAddTask } from "react-icons/md";
 import { FcInfo } from "react-icons/fc";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -169,7 +170,7 @@ const closePopup = () => {
               className="px-4 py-2 border rounded-md w-full md:w-1/3 shadow-sm"
           />
 
-          <select
+          {/* <select
               value={projectFilter}
               onChange={(e) => setProjectFilter(e.target.value)}
               className="px-4 py-2 border rounded-md w-full md:w-1/3 shadow-sm"
@@ -181,7 +182,27 @@ const closePopup = () => {
                  {proj}
            </option>
               ))}
-          </select>
+          </select> */}
+
+
+
+          <div className="relative w-full md:w-1/3">
+  <select
+    value={projectFilter}
+    onChange={(e) => setProjectFilter(e.target.value)}
+    className="px-4 py-2 pr-8 border rounded-md appearance-none w-full shadow-sm bg-white"
+  >
+    <option value="">All Projects</option>
+    {[...new Set(tasks.map((task) => task.project_name))].map((proj) => (
+      <option key={proj} value={proj}>{proj}</option>
+    ))}
+  </select>
+  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl text-gray-500 pointer-events-none">
+    <MdKeyboardArrowDown />
+  </span>
+</div>
+
+
 
          <button
              onClick={() => {
@@ -420,7 +441,7 @@ const closePopup = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                <div>
+                {/* <div>
                   <label className="block mb-1">Employee</label>
                   <select
                     name="employeeId"
@@ -436,7 +457,36 @@ const closePopup = () => {
                       </option>
                     ))}
                   </select>
-                </div>
+                </div> */}
+
+
+
+                <div>
+  <label className="block mb-1">Employee</label>
+  <div className="relative">
+    <select
+      name="employeeId"
+      value={formData.employeeId}
+      onChange={handleChange}
+      required
+      className="w-full border border-gray-300 p-2 pr-8 rounded-md appearance-none bg-white"
+    >
+      <option value="">Select</option>
+      {employees.map((emp) => (
+        <option key={emp._id} value={emp._id}>
+          {emp.name}
+        </option>
+      ))}
+    </select>
+    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500 pointer-events-none">
+      <MdKeyboardArrowDown />
+    </span>
+  </div>
+</div>
+
+
+
+
 
                 <div>
                   <label className="block mb-1">Project(s)</label>

@@ -709,40 +709,34 @@ useEffect(() => {
 
 useEffect(() => {
   const employeeEmail = localStorage.getItem("employeeEmail");
-  console.log("Stored Email:", employeeEmail); 
   const today = new Date().toISOString().split("T")[0];
 
   const loginTimeKey = `employeeLoginTime_${employeeEmail}`;
   const loginDateKey = `loginDate_${employeeEmail}`;
 
-  const storedLoginTime = localStorage.getItem(loginTimeKey);
-  const storedLoginDate = localStorage.getItem(loginDateKey);
+  let storedLoginTime = localStorage.getItem(loginTimeKey);
+  let storedLoginDate = localStorage.getItem(loginDateKey);
 
-  if (storedLoginDate === today && storedLoginTime) {
-    console.log("✅ Using stored login time");
-    setFormData((prevData) => ({
-      ...prevData,
-      date: today,
-      login: storedLoginTime,
-    }));
-  } else {
+  if (storedLoginDate !== today || !storedLoginTime) {
+    // ✅ New day OR no login stored yet → set fresh login time
     const now = new Date();
-    
-    const formattedTime = `${String(now.getHours()).padStart(2, "0")}:${String(
+    storedLoginTime = `${String(now.getHours()).padStart(2, "0")}:${String(
       now.getMinutes()
     ).padStart(2, "0")}`;
-    console.log(" Saving new login time:", formattedTime);
 
-    localStorage.setItem(loginTimeKey, formattedTime);
+    localStorage.setItem(loginTimeKey, storedLoginTime);
     localStorage.setItem(loginDateKey, today);
-
-    setFormData((prevData) => ({
-      ...prevData,
-      date: today,
-      login: formattedTime,
-    }));
   }
+
+  // ✅ Always use localStorage time, never overwrite for the same day
+  setFormData((prevData) => ({
+    ...prevData,
+    date: today,
+    login: storedLoginTime,
+  }));
 }, []);
+
+
 
 
 
@@ -964,7 +958,19 @@ useEffect(() => {
           <div className="absolute top-4 right-4">
             <img src={profileImage} alt="Employee" className="w-16 h-16 rounded-full border-2 border-blue-400 object-cover cursor-pointer" onClick={() => navigate("/employeedeatilsemployeesidepage")} />
           </div>
-          <h2 className="text-2xl font-bold">Welcome, {employee?.name || "Employee"}</h2>
+          <h2 className="text-2xl font-bold">
+             {/* Mobile view (Welcome + Name alag line me) */}
+              <span className="block sm:hidden">
+                 Welcome,
+                <span className="block">{employee?.name || "Employee"}</span>
+              </span>
+
+              {/* Desktop/Laptop view (Welcome, Name ek hi line me) */}
+                 <span className="hidden sm:inline">
+                    Welcome, {employee?.name || "Employee"}
+                 </span>
+          </h2>
+
           <p className="text-sm text-gray-600 mt-1"><span className="font-bold">Designation:</span> {employee?.designation || "N/A"}</p>
           <p className="text-sm text-gray-600"><span className="font-bold">Projects:</span> {employee?.project || "N/A"}</p>
 
@@ -997,13 +1003,14 @@ useEffect(() => {
               <div>
                 <label className="text-sm font-medium">Login time</label>
                   <input
-                     type="text"
-                     placeholder="HH:MM"
-                     maxLength={5}
-                     value={formData.login}
-                     readOnly
-                     className="mt-1 w-full px-4 py-2 border rounded-lg bg-gray-100 text-gray-600 shadow-sm cursor-not-allowed"
-                  />
+  type="text"
+  placeholder="HH:MM"
+  maxLength={5}
+  value={formData.login}
+  onChange={(e) => handleTimeChange("login", e.target.value)}
+  className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+/>
+
               </div>
 
               {/* <div>
@@ -1340,7 +1347,7 @@ useEffect(() => {
     <div className="flex items-center space-x-2 mb-4">
       <div className="w-2 h-6 bg-blue-500 rounded-sm"></div>
       <h2 className="text-xl font-semibold text-gray-800 tracking-wide">
-        Task Description
+        Full Description
       </h2>
     </div>
 

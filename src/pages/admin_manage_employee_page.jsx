@@ -13,6 +13,8 @@ import { RxCross2 } from "react-icons/rx";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 
 
 
@@ -426,29 +428,46 @@ const designationOptionsByIndustry = {
             
 
 
-            <select name="gender" value={employeeData.gender || ""} onChange={handleChange} className="w-full px-4 py-2 border rounded-md text-sm bg-white">
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
+            <div className="relative">
+  <select
+    name="gender"
+    value={employeeData.gender || ""}
+    onChange={handleChange}
+    className="w-full px-4 py-2 pr-8 border rounded-md text-sm bg-white appearance-none"
+  >
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xl">
+    <MdKeyboardArrowDown />
+  </span>
+</div>
 
 
 
-            <select
-        name="industry"
-        value={employeeData.industry}
-        onChange={handleChange}
-        className="w-full px-4 py-2 border rounded-md text-sm bg-white"
-      >
-        <option value="">Select industry</option>
-        <option value="Software">Software</option>
-        <option value="Firmware/Embedded">Firmware/Embedded</option>
-        <option value="Hardware">Hardware</option>
-        <option value="HR">HR</option>
-        <option value="BA">BA</option>
-        <option value="Sales & Marketing">Sales & Marketing</option>
-      </select>
+
+
+      <div className="relative">
+  <select
+    name="industry"
+    value={employeeData.industry}
+    onChange={handleChange}
+    className="w-full px-4 py-2 pr-8 border rounded-md text-sm bg-white appearance-none"
+  >
+    <option value="">Select industry</option>
+    <option value="Software">Software</option>
+    <option value="Firmware/Embedded">Firmware/Embedded</option>
+    <option value="Hardware">Hardware</option>
+    <option value="HR">HR</option>
+    <option value="BA">BA</option>
+    <option value="Sales & Marketing">Sales & Marketing</option>
+  </select>
+  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xl">
+    <MdKeyboardArrowDown />
+  </span>
+</div>
 
 
 
@@ -517,7 +536,7 @@ const designationOptionsByIndustry = {
 
 
           {/* <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6"> */}
-             <select
+             {/* <select
                 name="role"
                 value={employeeData.role}
                 onChange={handleChange}
@@ -526,7 +545,29 @@ const designationOptionsByIndustry = {
                 <option value="">Select Role</option>
                 <option value="Employee">Employee</option>
                 <option value="Employee TL">Employee TL</option>
-             </select>
+             </select> */}
+
+
+
+
+            <div className="relative">
+  <select
+    name="role"
+    value={employeeData.role}
+    onChange={handleChange}
+    className="w-full px-4 py-2 pr-8 border rounded-md text-sm bg-white appearance-none"
+  >
+    <option value="">Select Role</option>
+    <option value="Employee">Employee</option>
+    <option value="Employee TL">Employee TL</option>
+  </select>
+  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xl">
+    <MdKeyboardArrowDown />
+  </span>
+</div>
+
+
+
 
   <Select
     isMulti

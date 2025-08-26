@@ -65,7 +65,22 @@ export default function AdminRequirementsPage() {
     };
 
     fetchRequirements();
+    markRequirementNotificationsAsRead();
   }, []);
+
+
+
+  const markRequirementNotificationsAsRead = async () => {
+  try {
+    await fetch("http://localhost:3004/mark-requirement-notifications-read", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.error("Failed to mark requirement notifications as read:", err);
+  }
+};
+
 
   
 
@@ -267,7 +282,7 @@ export default function AdminRequirementsPage() {
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-2 h-6 bg-blue-500 rounded-sm"></div>
               <h2 className="text-xl font-semibold text-gray-800 tracking-wide">
-                Details
+                Full Description
               </h2>
             </div>
             <div className="max-h-72 overflow-y-auto pr-1">

@@ -181,7 +181,7 @@ export default function App() {
           <Route
             path="/employeedetailsadminsidepage"
             element={
-              <ProtectedRoute role="employee">
+              <ProtectedRoute role="admin">
                 <EmployeeDetailsProfileForAdminPage />
               </ProtectedRoute>
             }

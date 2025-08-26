@@ -4,6 +4,8 @@ import axios from "axios";
 import AdminHeader from "../components/admin_header";
 import { FcInfo } from "react-icons/fc";
 
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -38,16 +40,17 @@ export default function AdminLeaveRequestsPage() {
 
   useEffect(() => {
     fetchLeaveRequests();
-    markAdminNotificationsAsRead();
+    markLeaveNotificationsAsRead();
   }, []);
 
-  const markAdminNotificationsAsRead = async () => {
-    try {
-      await axios.post("http://localhost:3004/mark-admin-notifications-read");
-    } catch (err) {
-      console.error("Failed to mark admin notifications as read:", err);
-    }
-  };
+ const markLeaveNotificationsAsRead = async () => {
+  try {
+    await axios.post("http://localhost:3004/mark-leave-notifications-read");
+  } catch (err) {
+    console.error("Failed to mark leave notifications as read:", err);
+  }
+};
+
 
   const fetchLeaveRequests = async () => {
     try {
@@ -124,7 +127,7 @@ export default function AdminLeaveRequestsPage() {
         )
       );
 
-      // ✅ Show toast based on newStatus
+      //  Show toast based on newStatus
       if (newStatus === "Approved") {
         toast.success("Leave request approved successfully.", {autoClose:2000});
       } else if (newStatus === "Rejected") {
@@ -161,7 +164,7 @@ export default function AdminLeaveRequestsPage() {
             onChange={(e) => setSearchName(e.target.value.toLowerCase())}
           />
 
-          <select
+          {/* <select
             className="border px-3 py-2 rounded-lg"
             onChange={(e) => setFilterMonth(e.target.value)}
           >
@@ -170,7 +173,30 @@ export default function AdminLeaveRequestsPage() {
               const month = new Date(0, i).toLocaleString("default", { month: "long" });
               return <option key={i} value={i}>{month}</option>;
             })}
-          </select>
+          </select> */}
+
+
+
+<div className="relative w-fit">
+  <select
+    className="border px-3 py-2 pr-8 rounded-lg appearance-none text-sm bg-white"
+    onChange={(e) => setFilterMonth(e.target.value)}
+  >
+    <option value="">All Months</option>
+    {Array.from({ length: 12 }, (_, i) => {
+      const month = new Date(0, i).toLocaleString("default", { month: "long" });
+      return <option key={i} value={i}>{month}</option>;
+    })}
+  </select>
+  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xl">
+    <MdKeyboardArrowDown />
+  </span>
+</div>
+
+
+
+
+
 
           <button
             className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500"
@@ -321,7 +347,7 @@ export default function AdminLeaveRequestsPage() {
     <div className="flex items-center space-x-2 mb-4">
       <div className="w-2 h-6 bg-blue-500 rounded-sm"></div>
       <h2 className="text-xl font-semibold text-gray-800 tracking-wide">
-        Task Description
+        Full Description
       </h2>
     </div>
 

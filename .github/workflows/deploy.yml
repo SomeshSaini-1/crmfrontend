@@ -18,16 +18,13 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm ci
-        working-directory: ./frontend
+        run: npm install
 
       - name: Run Tests (optional)
-        run: npm test -- --watchAll=false
-        working-directory: ./frontend
+        run: npm test
 
       - name: Build Project (for React/Next.js)
         run: npm run build
-        working-directory: ./frontend
 
       - name: Deploy using SSH
         uses: appleboy/scp-action@master
@@ -35,5 +32,5 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./frontend/build/"
+          source: "./build/"
           target: "/var/www/html/somesh/crm"

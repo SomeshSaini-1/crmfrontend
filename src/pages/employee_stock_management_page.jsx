@@ -39,7 +39,7 @@ const EmployeeStockManagementPage = () => {
   const fetchStockData = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3004/view-admin-stock");
+      const response = await axios.post("http://otplai.com:4006/view-admin-stock");
       if (response.data.success) {
         setStockData(response.data.data);
       } else {
@@ -58,7 +58,7 @@ const EmployeeStockManagementPage = () => {
 
   const confirmDeleteStock = async () => {
     try {
-      const response = await axios.post("http://localhost:3004/delete-admin-stock", { _id: deleteId });
+      const response = await axios.post("http://otplai.com:4006/delete-admin-stock", { _id: deleteId });
       if (response.data && response.data.success) {
         setStockData((prev) => prev.filter((item) => item._id !== deleteId));
         toast.success("Stock deleted successfully!", { autoClose: 2000 });

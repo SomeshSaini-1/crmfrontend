@@ -37,9 +37,10 @@ export default function AdminTimesheetsPage() {
 
   const fetchEmployees = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee");
+      const res = await axios.post("http://otplai.com:4006/view-employee");
       if (res.data.success) {
         setEmployees(res.data.data);
+        console.log(res.data.data);
       } else {
         console.error("Employee fetch failed");
       }
@@ -51,7 +52,7 @@ export default function AdminTimesheetsPage() {
 
   const fetchTimesheetData = async (employeeId) => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee-timesheet", { id: employeeId });
+      const res = await axios.post("http://otplai.com:4006/view-employee-timesheet", { id: employeeId });
       if (res.data.success) {
         setTimesheet(res.data.data);
       } else {
@@ -67,7 +68,7 @@ export default function AdminTimesheetsPage() {
 
   const confirmDeleteEmployee = async () => {
   try {
-    const res = await axios.post("http://localhost:3004/delete-employee", {
+    const res = await axios.post("http://otplai.com:4006/delete-employee", {
       _id: employeeIdToDelete,
     });
 
@@ -105,7 +106,7 @@ export default function AdminTimesheetsPage() {
 
   const fetchLeaveRequests = async () => {
   try {
-    const res = await axios.post("http://localhost:3004/view-employee-leave-request-admin-table");
+    const res = await axios.post("http://otplai.com:4006/view-employee-leave-request-admin-table");
     if (res.data.success) {
       let casual = 12;
       let sick = 5;
@@ -374,7 +375,7 @@ useEffect(()=>{
                         {/*  Attachment - show download/view link */}
                       <td className="border px-2 py-1 sm:px-4 sm:py-2">{entry.attachment ? (
            <a
-            href={`http://localhost:3004/uploads/${entry.attachment}`}
+            href={`http://otplai.com:4006/uploads/${entry.attachment}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600"

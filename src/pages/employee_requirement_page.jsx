@@ -62,7 +62,7 @@ export default function EmployeeRequirementsPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:3004/add-requirement", {
+      const response = await fetch("http://otplai.com:4006/add-requirement", {
         method: "POST",
         body: form,
       });
@@ -102,7 +102,7 @@ export default function EmployeeRequirementsPage() {
 
       try {
         const response = await fetch(
-          "http://localhost:3004/view-requirement-table-employee",
+          "http://otplai.com:4006/view-requirement-table-employee",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -266,7 +266,7 @@ export default function EmployeeRequirementsPage() {
                   <td className="p-2 sm:p-3 border">
                     {req.attachment ? (
                       <a
-                        href={`http://localhost:3004/uploads/${req.attachment}`}
+                        href={`http://otplai.com:4006/uploads/${req.attachment}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 underline"

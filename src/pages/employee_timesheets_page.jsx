@@ -92,7 +92,7 @@
 
 //   const fetchEmployeeData = async () => {
 //     try {
-//       const res = await axios.post("http://localhost:3004/view-employee");
+//       const res = await axios.post("http://otplai.com:4006/view-employee");
 //       if (res.data.success && res.data.data?.length) {
 //         const email = localStorage.getItem("employeeEmail");
 //         const matchedEmployee = res.data.data.find(emp => emp.email === email);
@@ -108,7 +108,7 @@
 
 //   // const fetchProjectData = async () => {
 //   //   try {
-//   //     const res = await axios.post("http://localhost:3004/view-project");
+//   //     const res = await axios.post("http://otplai.com:4006/view-project");
 //   //     if (res.data.success) {
 //   //       setProjects(res.data.data);
 //   //     }
@@ -120,7 +120,7 @@
 
 //   const fetchEmployeeTimesheets = async () => {
 //     try {
-//       const res = await axios.post("http://localhost:3004/view-employee-timesheet", {
+//       const res = await axios.post("http://otplai.com:4006/view-employee-timesheet", {
 //         id: employee._id
 //       });
 //       if (res.data.success) {
@@ -208,7 +208,7 @@
 //   if (suggestion) form.append("suggestions", suggestion);
 
 //   try {
-//     const res = await axios.post("http://localhost:3004/add-employee-timesheet", form, {
+//     const res = await axios.post("http://otplai.com:4006/add-employee-timesheet", form, {
 //       headers: {
 //         "Content-Type": "multipart/form-data",
 //       },
@@ -563,7 +563,7 @@
 //         <td className="p-3 border">
 //           {entry.attachment ? (
 //             <a
-//               href={`http://localhost:3004/uploads/${entry.attachment}`}
+//               href={`http://otplai.com:4006/uploads/${entry.attachment}`}
 //               target="_blank"
 //               rel="noopener noreferrer"
 //               className="text-blue-600"
@@ -756,7 +756,7 @@ useEffect(() => {
 
   const fetchEmployeeData = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee");
+      const res = await axios.post("http://otplai.com:4006/view-employee");
       if (res.data.success && res.data.data?.length) {
         const email = localStorage.getItem("employeeEmail");
         const matchedEmployee = res.data.data.find(emp => emp.email === email);
@@ -772,7 +772,7 @@ useEffect(() => {
 
   // const fetchProjectData = async () => {
   //   try {
-  //     const res = await axios.post("http://localhost:3004/view-project");
+  //     const res = await axios.post("http://otplai.com:4006/view-project");
   //     if (res.data.success) {
   //       setProjects(res.data.data);
   //     }
@@ -784,7 +784,7 @@ useEffect(() => {
 
   const fetchEmployeeTimesheets = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee-timesheet", {
+      const res = await axios.post("http://otplai.com:4006/view-employee-timesheet", {
         id: employee._id
       });
       if (res.data.success) {
@@ -872,7 +872,7 @@ useEffect(() => {
   if (suggestion) form.append("suggestions", suggestion);
 
   try {
-    const res = await axios.post("http://localhost:3004/add-employee-timesheet", form, {
+    const res = await axios.post("http://otplai.com:4006/add-employee-timesheet", form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -1259,7 +1259,7 @@ useEffect(() => {
               <td className="p-2 md:p-3 border text-center">
                 {entry.attachment ? (
                   <a
-                    href={`http://localhost:3004/uploads/${entry.attachment}`}
+                    href={`http://otplai.com:4006/uploads/${entry.attachment}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600"

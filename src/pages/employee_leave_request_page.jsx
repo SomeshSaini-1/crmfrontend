@@ -49,7 +49,7 @@ export default function EmployeeLeaveRequestPage() {
     // View Employee 
     useEffect(() => {
     if (employee?._id) {
-    axios.post("http://localhost:3004/view-employee", { employeeId: employee._id })
+    axios.post("http://otplai.com:4006/view-employee", { employeeId: employee._id })
       .then((res) => {
         const emp = res.data.data;
         setLeaveStats({
@@ -64,7 +64,7 @@ export default function EmployeeLeaveRequestPage() {
 
   const fetchEmployeeData = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee");
+      const res = await axios.post("http://otplai.com:4006/view-employee");
       if (res.data.success && res.data.data?.length) {
         const email = localStorage.getItem("employeeEmail");
         const matchedEmployee = res.data.data.find(emp => emp.email === email);
@@ -81,7 +81,7 @@ export default function EmployeeLeaveRequestPage() {
 
   const fetchLeaveRequestsFromDB = async (empId) => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee-leave-request-table", {
+      const res = await axios.post("http://otplai.com:4006/view-employee-leave-request-table", {
         employeeId: empId,
       });
 
@@ -125,7 +125,7 @@ export default function EmployeeLeaveRequestPage() {
 
    const fetchLeaveRequests = async () => {
   try {
-    const res = await axios.post("http://localhost:3004/view-employee-leave-request-admin-table");
+    const res = await axios.post("http://otplai.com:4006/view-employee-leave-request-admin-table");
     if (res.data.success) {
       let casual = 12;
       let sick = 5;
@@ -207,7 +207,7 @@ useEffect(()=>{
     }
 
     try {
-      const response = await axios.post("http://localhost:3004/add-leave-request", formData);
+      const response = await axios.post("http://otplai.com:4006/add-leave-request", formData);
       if (response.data.success) {
         // alert("Leave request submitted successfully!");
               toast.success("Leave request submitted successfully!");
@@ -215,7 +215,7 @@ useEffect(()=>{
 
         setLeaveRequest({ from: "", to: "", reason: "", file: null, leaveType: "Casual Leave" });
 
-        await axios.post("http://localhost:3004/add-notification", {
+        await axios.post("http://otplai.com:4006/add-notification", {
          admin: true,
          message: `${employee?.name} has sent a leave request.`,
         });
@@ -441,7 +441,7 @@ useEffect(()=>{
                   <td className="p-2 sm:p-3 border text-center">
                     {req.file ? (
                       <a
-                        href={`http://localhost:3004/uploads/${req.file.name}`}
+                        href={`http://otplai.com:4006/uploads/${req.file.name}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 underline"

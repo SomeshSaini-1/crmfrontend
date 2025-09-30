@@ -34,7 +34,7 @@ export default function AdminRequirementsPage() {
     const fetchRequirements = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3004/view-requirement-table-admin",
+          "http://otplai.com:4006/view-requirement-table-admin",
           {
             method: "POST",
             headers: {
@@ -72,7 +72,7 @@ export default function AdminRequirementsPage() {
 
   const markRequirementNotificationsAsRead = async () => {
   try {
-    await fetch("http://localhost:3004/mark-requirement-notifications-read", {
+    await fetch("http://otplai.com:4006/mark-requirement-notifications-read", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
@@ -89,7 +89,7 @@ export default function AdminRequirementsPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:3004/update-admin-comment",
+        "http://otplai.com:4006/update-admin-comment",
         {
           method: "POST",
           headers: {
@@ -200,7 +200,7 @@ export default function AdminRequirementsPage() {
                     <td className="p-3 border">
                       {req.attachment ? (
                         <a
-                              href={`http://localhost:3004/uploads/${req.attachment}`}  // filename hona chahiye, not name
+                              href={`http://otplai.com:4006/uploads/${req.attachment}`}  // filename hona chahiye, not name
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-blue-600 underline"

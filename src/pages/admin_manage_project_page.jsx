@@ -42,7 +42,7 @@ export default function AdminManageProjectPage() {
   //  Fetch projects from backend
   const fetchProjects = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-project");
+      const res = await axios.post("http://otplai.com:4006/view-project");
       if (res.data.success) {
         setProjects(res.data.data);
       } else {
@@ -77,7 +77,7 @@ export default function AdminManageProjectPage() {
       }
 
       const response = await axios.post(
-        "http://localhost:3004/add-project",
+        "http://otplai.com:4006/add-project",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -114,7 +114,7 @@ const handleDeleteClick = (id) => {
 // Step 2: Called when "Delete" is confirmed in the modal
 const confirmDeleteProject = async () => {
   try {
-    const res = await axios.post("http://localhost:3004/delete-project", {
+    const res = await axios.post("http://otplai.com:4006/delete-project", {
       _id: projectIdToDelete,
     });
 
@@ -148,7 +148,7 @@ const confirmDeleteProject = async () => {
         formData.append("attachment", editAttachment);
       }
 
-      const res = await axios.post("http://localhost:3004/edit-project", formData, {
+      const res = await axios.post("http://otplai.com:4006/edit-project", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -258,7 +258,7 @@ const confirmDeleteProject = async () => {
                   <td className="px-4 py-2 border-r">
                        {proj.attachment ? (
                         <a
-                           href={`http://localhost:3004/uploads/${proj.attachment}`}
+                           href={`http://otplai.com:4006/uploads/${proj.attachment}`}
                            target="_blank"
                            rel="noopener noreferrer"
                            className="text-blue-600 flex justify-center">View

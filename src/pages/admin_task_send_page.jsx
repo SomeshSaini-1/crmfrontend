@@ -56,7 +56,7 @@ export default function AdminSendTaskForm() {
 
   const fetchEmployees = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee");
+      const res = await axios.post("http://otplai.com:4006/view-employee");
       if (res.data.success) setEmployees(res.data.data);
     } catch (err) {
       console.error("Failed to fetch employees", err);
@@ -65,7 +65,7 @@ export default function AdminSendTaskForm() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-project");
+      const res = await axios.post("http://otplai.com:4006/view-project");
       if (res.data.success) setProjects(res.data.data);
     } catch (err) {
       console.error("Failed to fetch projects", err);
@@ -74,7 +74,7 @@ export default function AdminSendTaskForm() {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-assign-task-admin");
+      const res = await axios.post("http://otplai.com:4006/view-assign-task-admin");
       if (res.data.success) setTasks(res.data.data);
     } catch (err) {
       console.error("Failed to fetch tasks", err);
@@ -117,7 +117,7 @@ export default function AdminSendTaskForm() {
 
     if (attachment) data.append("attachment", attachment);
 
-    const res = await axios.post("http://localhost:3004/assign-task-admin", data, {
+    const res = await axios.post("http://otplai.com:4006/assign-task-admin", data, {
         headers: { "Content-Type": "multipart/form-data" },
     });
 
@@ -295,7 +295,7 @@ const closePopup = () => {
             <td className="px-4 py-2 border-r">
               {task.attachment ? (
                 <a
-                  href={`http://localhost:3004/uploads/${task.attachment}`}
+                  href={`http://otplai.com:4006/uploads/${task.attachment}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 underline"
@@ -377,7 +377,7 @@ const closePopup = () => {
       <td className="px-4 py-2 border-r">
         {task.attachment ? (
           <a
-            href={`http://localhost:3004/uploads/${task.attachment}`}
+            href={`http://otplai.com:4006/uploads/${task.attachment}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline"

@@ -48,7 +48,7 @@ const [tlAssignedTasks, setTlAssignedTasks] = useState([]);
 
 const fetchTLAssignedTasks = async (tlName) => {
   try {
-    const res = await axios.post("http://localhost:3004/view-task-by-tl", {
+    const res = await axios.post("http://otplai.com:4006/view-task-by-tl", {
       assignedBy: tlName,
     });
     if (res.data.success) {
@@ -100,7 +100,7 @@ data.append("time", currentTime);
 
       if (attachment) data.append("attachment", attachment);
 
-      const res = await axios.post("http://localhost:3004/assign-task-tl", data, {
+      const res = await axios.post("http://otplai.com:4006/assign-task-tl", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -153,7 +153,7 @@ data.append("time", currentTime);
 
   const fetchEmployee = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee");
+      const res = await axios.post("http://otplai.com:4006/view-employee");
       const email = localStorage.getItem("employeeEmail");
       console.log("📧 Employee Email from LocalStorage:", email);
       const emp = res.data.data.find((e) => e.email === email);
@@ -166,7 +166,7 @@ data.append("time", currentTime);
 
   const fetchAssignedTasks = async (empId) => {
     try {
-      const res = await axios.post("http://localhost:3004/view-assign-task-employee", {
+      const res = await axios.post("http://otplai.com:4006/view-assign-task-employee", {
         employeeId: empId,
       });
       if (res.data.success) {
@@ -197,7 +197,7 @@ data.append("time", currentTime);
 
 const fetchEmployees = async () => {
   try {
-    const res = await axios.post("http://localhost:3004/view-employee");
+    const res = await axios.post("http://otplai.com:4006/view-employee");
     const allEmployees = res.data.data;
 
     const currentUserEmail = localStorage.getItem("employeeEmail");
@@ -219,7 +219,7 @@ const fetchEmployees = async () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-project");
+      const res = await axios.post("http://otplai.com:4006/view-project");
       if (res.data.success) setProjects(res.data.data);
     } catch (err) {
       console.error("Failed to fetch projects", err);
@@ -229,7 +229,7 @@ const fetchEmployees = async () => {
 
    const fetchTasks = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-assign-task-admin");
+      const res = await axios.post("http://otplai.com:4006/view-assign-task-admin");
       if (res.data.success) setTasks(res.data.data);
     } catch (err) {
       console.error("Failed to fetch tasks", err);
@@ -242,7 +242,7 @@ const fetchEmployees = async () => {
 
   const fetchNotifications = async (empId) => {
     try {
-      const res = await axios.post("http://localhost:3004/get-employee-notifications", {
+      const res = await axios.post("http://otplai.com:4006/get-employee-notifications", {
         employeeId: empId,
       });
       if (res.data.success) {
@@ -255,7 +255,7 @@ const fetchEmployees = async () => {
 
   const markNotificationsRead = async (empId) => {
     try {
-      await axios.post("http://localhost:3004/mark-all-read", {
+      await axios.post("http://otplai.com:4006/mark-all-read", {
         employeeId: empId,
       });
     } catch (err) {
@@ -306,7 +306,7 @@ const filteredTlTasks = tlAssignedTasks.filter((task) => {
 
 const handleProgressChange = async (taskId, newProgress) => {
   try {
-    const res = await axios.post("http://localhost:3004/update-task-progress", {
+    const res = await axios.post("http://otplai.com:4006/update-task-progress", {
       taskId,
       progress: parseInt(newProgress),
     });
@@ -489,7 +489,7 @@ const handleProgressChange = async (taskId, newProgress) => {
                     <td className="p-3 border text-center">
                       {task.attachment ? (
                         <a
-                          href={`http://localhost:3004/uploads/${task.attachment}`}
+                          href={`http://otplai.com:4006/uploads/${task.attachment}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 underline"
@@ -620,7 +620,7 @@ const handleProgressChange = async (taskId, newProgress) => {
                 <td className="p-3 border text-center">
                   {task.attachment ? (
                     <a
-                      href={`http://localhost:3004/uploads/${task.attachment}`}
+                      href={`http://otplai.com:4006/uploads/${task.attachment}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline"

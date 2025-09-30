@@ -35,7 +35,7 @@ export default function AdminAddStockPage() {
   setError("");
 
   try {
-    const response = await fetch("http://localhost:3004/add-admin-stock", {
+    const response = await fetch("http://otplai.com:4006/add-admin-stock", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

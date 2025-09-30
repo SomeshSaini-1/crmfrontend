@@ -13,7 +13,7 @@ export default function AdminDetails() {
         const email = localStorage.getItem("adminEmail"); // Or use auth context if you have
         if (!email) return;
 
-        const response = await axios.post("http://localhost:3004/admin-profile", { email });
+        const response = await axios.post("http://otplai.com:4006/admin-profile", { email });
         if (response.data.success) {
           setAdminData(response.data.data);
         } else {

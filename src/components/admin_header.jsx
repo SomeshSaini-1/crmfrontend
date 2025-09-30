@@ -24,7 +24,7 @@ export default function AdminHeader() {
   const fetchAdminNotifications = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3004/get-admin-notifications"
+        "http://otplai.com:4006/get-admin-notifications"
       );
       if (res.data.success) {
         const notifications = res.data.data;
@@ -52,7 +52,7 @@ export default function AdminHeader() {
   //  Requirement notifications read
 const handleRequirementClick = async () => {
   try {
-    await axios.post("http://localhost:3004/mark-requirement-notifications-read");
+    await axios.post("http://otplai.com:4006/mark-requirement-notifications-read");
     setRequirementCount(0); 
     navigate("/adminrequirementpage");
     setInventoryDropdownOpen(false);
@@ -65,7 +65,7 @@ const handleRequirementClick = async () => {
 //  Leave notifications read
 const handleLeaveClick = async () => {
   try {
-    await axios.post("http://localhost:3004/mark-leave-notifications-read");
+    await axios.post("http://otplai.com:4006/mark-leave-notifications-read");
     setLeaveCount(0); 
     navigate("/adminleaverequestpage");
     setMobileMenuOpen(false);

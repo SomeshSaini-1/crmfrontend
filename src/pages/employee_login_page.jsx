@@ -42,7 +42,7 @@ export default function EmployeeLoginPage() {
   try {
     setLoading(true);
 
-    const res = await axios.post("http://localhost:3004/login-employee", {
+    const res = await axios.post("http://otplai.com:4006/login-employee", {
       email,
       password,
     });

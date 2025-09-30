@@ -27,7 +27,7 @@ export default function EmployeeHeader() {
       if (!email) return;
 
       try {
-        const res = await axios.post("http://localhost:3004/view-employee");
+        const res = await axios.post("http://otplai.com:4006/view-employee");
         if (res.data.success) {
 
 
@@ -36,7 +36,7 @@ if (foundEmployee) {
   setEmployee(foundEmployee); // 👈 yaha state me save kar diya
 
   const notiRes = await axios.post(
-    "http://localhost:3004/get-employee-notifications",
+    "http://otplai.com:4006/get-employee-notifications",
     { employeeId: foundEmployee._id }
   );
   if (notiRes.data.success) {

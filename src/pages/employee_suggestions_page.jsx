@@ -17,7 +17,7 @@
 //   useEffect(() => {
 //     const fetchEmployee = async () => {
 //       try {
-//         const res = await axios.post("http://localhost:3004/view-employee");
+//         const res = await axios.post("http://otplai.com:4006/view-employee");
 //         if (res.data.success && res.data.data?.length) {
 //           const email = localStorage.getItem("employeeEmail");
 //           const matchedEmployee = res.data.data.find(emp => emp.email === email);
@@ -64,7 +64,7 @@
 //         formPayload.append("file", formData.file);
 //       }
 
-//       const res = await axios.post("http://localhost:3004/add-suggestion", formPayload, {
+//       const res = await axios.post("http://otplai.com:4006/add-suggestion", formPayload, {
 //         headers: { "Content-Type": "multipart/form-data" },
 //       });
 
@@ -184,7 +184,7 @@
 //                       <td className="p-3 border text-center">
 //                         {sugg.file ? (
 //                           <a
-//                             href={`http://localhost:3004/uploads/${sugg.file}`}
+//                             href={`http://otplai.com:4006/uploads/${sugg.file}`}
 //                             target="_blank"
 //                             rel="noopener noreferrer"
 //                             className="text-blue-600 underline"

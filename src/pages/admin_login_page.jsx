@@ -31,63 +31,94 @@ useEffect(() => {
 
 
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      setErrorMsg("Please enter both email and password.");
-      return;
-    }
-    try {
-      const response = await axios.post("http://localhost:3004/admin-login", {
-        email,
-        password,
-      });
+//   const handleLogin = async () => {
+//     if (!email || !password) {
+//       setErrorMsg("Please enter both email and password.");
+//       return;
+//     }
+//     try {
+//       const response = await axios.post("http://otplai.com:4006/admin-login", {
+//         email,
+//         password,
+//       });
 
-      const resData = response.data;
+//       const resData = response.data;
 
-      if (resData.success) {
-        localStorage.setItem("adminToken", resData.token);
-        localStorage.setItem("adminId", resData.data._id);
-        localStorage.setItem("adminName", resData.data.name);
-        localStorage.setItem("adminEmail", resData.data.email);
-
-
-        // if (rememberMe) {
-        //     localStorage.setItem("rememberAdminEmail", email);
-        //     localStorage.setItem("rememberAdminPassword", password);
-
-        // } else {
-        //      localStorage.removeItem("rememberEmail");
-        //      localStorage.removeItem("rememberPassword");
-        // }
+//       if (resData.success) {
+//         localStorage.setItem("adminToken", resData.token);
+//         localStorage.setItem("adminId", resData.data._id);
+//         localStorage.setItem("adminName", resData.data.name);
+//         localStorage.setItem("adminEmail", resData.data.email);
 
 
+//         // if (rememberMe) {
+//         //     localStorage.setItem("rememberAdminEmail", email);
+//         //     localStorage.setItem("rememberAdminPassword", password);
 
-        if (rememberMe) {
-  localStorage.setItem("rememberAdminEmail", email);
-  localStorage.setItem("rememberAdminPassword", password);
-} else {
-  localStorage.removeItem("rememberAdminEmail");
-  localStorage.removeItem("rememberAdminPassword");
-}
+//         // } else {
+//         //      localStorage.removeItem("rememberEmail");
+//         //      localStorage.removeItem("rememberPassword");
+//         // }
 
 
 
+//         if (rememberMe) {
+//   localStorage.setItem("rememberAdminEmail", email);
+//   localStorage.setItem("rememberAdminPassword", password);
+// } else {
+//   localStorage.removeItem("rememberAdminEmail");
+//   localStorage.removeItem("rememberAdminPassword");
+// }
 
-        toast.success("Admin Login Successfully!", {autoClose:2000});
-                      setTimeout(() => {
-        navigate("/admintimesheetspage");
-        },2000)
-      } else {
-        setErrorMsg(resData.message);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      setErrorMsg("Something went wrong. Please try again.");
-    }
-  };
+
+
+
+//         toast.success("Admin Login Successfully!", {autoClose:2000});
+//                       setTimeout(() => {
+//         navigate("/admintimesheetspage");
+//         },2000)
+//       } else {
+//         setErrorMsg(resData.message);
+//       }
+//     } catch (error) {
+//       console.error("Login error:", error);
+//       setErrorMsg("Something went wrong. Please try again.");
+//     }
+//   };
   
 
+const handleLogin = async () => {
+  if (!email || !password) {
+    setErrorMsg("Please enter both email and password.");
+    return;
+  }
 
+  // Hardcoded credentials
+  const fixedEmail = "admin@gmail.com";
+  const fixedPassword = "admin123";
+
+  if (email === fixedEmail && password === fixedPassword) {
+    localStorage.setItem("adminToken", "dummy-token");
+    localStorage.setItem("adminId", "dummy-id");
+    localStorage.setItem("adminName", "Admin User");
+    localStorage.setItem("adminEmail", fixedEmail);
+
+    if (rememberMe) {
+      localStorage.setItem("rememberAdminEmail", email);
+      localStorage.setItem("rememberAdminPassword", password);
+    } else {
+      localStorage.removeItem("rememberAdminEmail");
+      localStorage.removeItem("rememberAdminPassword");
+    }
+
+    toast.success("Admin Login Successfully!", { autoClose: 2000 });
+    setTimeout(() => {
+      navigate("/admintimesheetspage");
+    }, 2000);
+  } else {
+    setErrorMsg("Invalid email or password.");
+  }
+};
 
   return (
     <div className="h-screen bg-cover bg-center flex justify-center items-center"

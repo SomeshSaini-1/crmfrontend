@@ -45,7 +45,7 @@ export default function AdminLeaveRequestsPage() {
 
  const markLeaveNotificationsAsRead = async () => {
   try {
-    await axios.post("http://localhost:3004/mark-leave-notifications-read");
+    await axios.post("http://otplai.com:4006/mark-leave-notifications-read");
   } catch (err) {
     console.error("Failed to mark leave notifications as read:", err);
   }
@@ -54,7 +54,7 @@ export default function AdminLeaveRequestsPage() {
 
   const fetchLeaveRequests = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-employee-leave-request-admin-table");
+      const res = await axios.post("http://otplai.com:4006/view-employee-leave-request-admin-table");
       if (res.data.success) {
         const formatted = res.data.data.map((item) => {
           const from = new Date(item.from_date);
@@ -115,7 +115,7 @@ export default function AdminLeaveRequestsPage() {
   }
 
   try {
-    const res = await axios.post("http://localhost:3004/update-leave-status", {
+    const res = await axios.post("http://otplai.com:4006/update-leave-status", {
       leaveId: id,
       status: newStatus,
     });
@@ -276,7 +276,7 @@ export default function AdminLeaveRequestsPage() {
         <td className="p-3 border text-center">
           {req.file ? (
             <a
-              href={`http://localhost:3004/uploads/${req.file.name}`}
+              href={`http://otplai.com:4006/uploads/${req.file.name}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline"

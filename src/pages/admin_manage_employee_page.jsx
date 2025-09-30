@@ -55,7 +55,7 @@ const [alternateError, setAlternateError] = useState("");
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-project");
+      const res = await axios.post("http://otplai.com:4006/view-project");
       if (res.data.success) setProjectList(res.data.data);
       else setProjectList([]);
     } catch (err) {
@@ -75,7 +75,7 @@ const [alternateError, setAlternateError] = useState("");
     return;
   }
   try {
-    const res = await axios.post("http://localhost:3004/check-employee-id", { employeeId: id });
+    const res = await axios.post("http://otplai.com:4006/check-employee-id", { employeeId: id });
     if (res.data.exists) {
       setEmployeeIdValid(false); //  already exists
     } else {
@@ -189,7 +189,7 @@ if (name === "email") {
         formData.append("profileImage", employeeData.file);
       }
 
-      const res = await axios.post("http://localhost:3004/add-employee", formData, {
+      const res = await axios.post("http://otplai.com:4006/add-employee", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

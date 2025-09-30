@@ -58,7 +58,7 @@ export default function AdminEditEmployeePage() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.post("http://localhost:3004/view-project");
+      const res = await axios.post("http://otplai.com:4006/view-project");
       if (res.data.success) {
         setProjectList(res.data.data);
       }
@@ -125,7 +125,7 @@ export default function AdminEditEmployeePage() {
         formData.append("profileImage", employeeData.file);
       }
 
-      const res = await axios.post("http://localhost:3004/edit-employee", formData, {
+      const res = await axios.post("http://otplai.com:4006/edit-employee", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

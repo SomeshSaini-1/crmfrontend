@@ -45,7 +45,7 @@
 //   //   setMessage("");
 
 //   //   try {
-//   //     const response = await axios.post("http://localhost:3004/add-employee-stock", {
+//   //     const response = await axios.post("http://otplai.com:4006/add-employee-stock", {
 //   //       name: formData.name,
 //   //       category: formData.category,
 //   //       packages: formData.packages,
@@ -86,7 +86,7 @@
 //   const employeeName = localStorage.getItem("employeeName"); // 👈 fetch addBy
 
 //   try {
-//     const response = await axios.post("http://localhost:3004/add-employee-stock", {
+//     const response = await axios.post("http://otplai.com:4006/add-employee-stock", {
 //       name: formData.name,
 //       category: formData.category,
 //       packages: formData.packages,
@@ -325,7 +325,7 @@ const EmployeeAddStockPage = () => {
     const employeeName = localStorage.getItem("employeeName");
 
     try {
-      const response = await axios.post("http://localhost:3004/add-employee-stock", {
+      const response = await axios.post("http://otplai.com:4006/add-employee-stock", {
         name: formData.name,
         category: formData.category,
         packages: formData.packages,

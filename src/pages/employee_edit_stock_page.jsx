@@ -83,7 +83,7 @@ const EmployeeEditStockForm = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:3004/edit-employee-stock",
+        "http://otplai.com:4006/edit-employee-stock",
         payload
       );
 

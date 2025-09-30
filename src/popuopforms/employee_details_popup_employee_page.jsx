@@ -9,7 +9,7 @@ export default function EmployeeProfilePage() {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const res = await axios.post("http://localhost:3004/view-employee");
+        const res = await axios.post("http://otplai.com:4006/view-employee");
         if (res.data.success) {
           const email = localStorage.getItem("employeeEmail");
           const emp = res.data.data.find((e) => e.email === email);

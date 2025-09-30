@@ -53,7 +53,7 @@ const handleShowHistory = (history) => {
   const fetchStockData = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3004/view-admin-stock");
+      const response = await axios.post("http://otplai.com:4006/view-admin-stock");
       if (response.data.success) {
         setStockData(response.data.data);
       } else {
@@ -80,7 +80,7 @@ const handleShowHistory = (history) => {
   // Delete stock integration
   const confirmDeleteProject = async () => {
   try {
-    const response = await axios.post("http://localhost:3004/delete-admin-stock", { _id: deleteId });
+    const response = await axios.post("http://otplai.com:4006/delete-admin-stock", { _id: deleteId });
 
     if (response.data && response.data.success) {
       setStockData((prev) => prev.filter((item) => item._id !== deleteId));

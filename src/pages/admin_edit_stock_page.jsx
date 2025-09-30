@@ -83,7 +83,7 @@ const AdminEditStockForm = () => {
       updatedBy: adminName, // ✅ Send updater name to backend
     };
 
-    const res = await axios.post("http://localhost:3004/edit-employee-stock", payload);
+    const res = await axios.post("http://otplai.com:4006/edit-employee-stock", payload);
 
     if (res.data.success) {
       toast.success("Stock updated successfully!");
